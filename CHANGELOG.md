@@ -19,4 +19,4 @@
 
 ## 1.0.0
 
-- Initial commit, first version. { 'commit' : '' }
+- Initial commit, first version. { 'commit' : 'f672f88' }
