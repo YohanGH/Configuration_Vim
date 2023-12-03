@@ -1,24 +1,21 @@
-"* ******************************************************************************* */
-"*										   */
-"*  Vimrc									   */	
-"*										   */
-"*  By: YohanGH <[Your Email]>		  __...--~~~~~-._   _.-~~~~~--...__	   */
-"*					 //               `V'               \\ 	   */
-"*				        //                 |                 \\    */
-"*  Created: 2023-11-29 By: YohanGH    //__...--~~~~~~-._  |  _.-~~~~~~--...__\\   */
-"*  Updated: 2023-11-29 By: YohanGH   //__.....----~~~~._\ | /_.~~~~----.....__\\  */
-"*				     ====================\\|//==================== */
-"*							 `---`			   */
-"*  										   */
-"*            									   */
-"* ******************************************************************************* */
-
+" **************************************************************************** "
+"                                                                              "
+"                                                         .--.    No           "
+"    .vimrc                                              |o_o |    Pain        "
+"                                                        |:_/ |     No         "
+"    By: YohanGH <YohanGH@proton.me>                    //    ''     Code      "
+"                                                      (|     | )              "
+"    Created: 2023/12/03 14:11:26 by YohanGH           '__   _/_               "
+"    Updated: 2023/12/03 16:49:54 by YohanGH          (___)=(___)              "
+"                                                                              "
+" **************************************************************************** "
 " --------------------------------------------------------------
 "
 " Inspiration ; https://github.com/gerardbm/vimrc/blob/master/vim/.vimrc
 "
 " Index :
 "	- General settings
+"		- User for Header automatic
 "	- Plugins
 "	- Plugins settings
 "	- User Interface
@@ -44,10 +41,12 @@
 " --------------------------------------------------------------
 " General settings
 " --------------------------------------------------------------
-" Disable vi compatibility
-if !has("nvim")
-	set nocompatible
-endif
+
+" Use UTF-8 as default encoding
+set encoding=utf8
+
+" File encoding UTF-8
+scriptencoding utf-8
 
 " Reload .vimrc
 nnoremap <F12> :so $MYVIMRC<CR>
@@ -80,6 +79,13 @@ cnoreabbrev help vert help
 " Set inc/dec
 set nrformats-=octal
 
+" --- User for Header automatic ---
+
+" --------------------------------------------------------------
+
+let g:userName = 'YohanGH'
+let g:mailName = 'YohanGH@proton.me'
+
 " --------------------------------------------------------------
 " Plugins (Plug)
 " --------------------------------------------------------------
@@ -87,7 +93,11 @@ set nrformats-=octal
 " Activer Vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+
+  augroup VimPlugSetup
+    autocmd!
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  augroup END
 endif
 
 " --- Plugins ---
@@ -378,22 +388,26 @@ let g:AutoPairsShortcutToggle = '<C-y>'
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.xml,*.html.erb,*.md'
 
 " Surround settings
-" Use 'yss?', 'yss%' or 'yss=' to surround a line
-"autocmd FileType php let b:surround_{char2nr('p')} = "<?php \r ?>"
-autocmd FileType erb let b:surround_{char2nr('=')} = "<%= \r %>"
-autocmd FileType erb let b:surround_{char2nr('-')} = "<% \r %>"
-"autocmd FileType html,markdown,let b:surround_{char2nr('p')} = "{% \r %}"
-autocmd FileType markdown,let b:surround_{char2nr('i')} = "_\r_"
-autocmd FileType markdown,let b:surround_{char2nr('o')} = "**\r**"
-autocmd FileType markdown,let b:surround_{char2nr('x')} = "«\r»"
-autocmd FileType markdown,let b:surround_{char2nr('h')} = "\[\r\]\(//\)"
-autocmd FileType markdown,let b:surround_{char2nr('j')} = "!\[\r\]
-			\\(/images/\){: .align-}"
-autocmd FileType markdown,let b:surround_{char2nr('e')} = "\[\r\]
-			\\(\){:rel=\"noopener noreferrer\" target=\"_blank\"}"
-autocmd FileType markdown,let b:surround_{char2nr('y')} = "<a href=\"\"
-			\ rel=\"noopener noreferrer\" target=\"_blank\">\r<\/a>"
+augroup SurroundSettings
+  autocmd!
 
+  " Use 'yss?', 'yss%' or 'yss=' to surround a line
+  " autocmd FileType php let b:surround_{char2nr('p')} = "<?php \r ?>"
+  autocmd FileType erb let b:surround_{char2nr('=')} = "<%= \r %>"
+  autocmd FileType erb let b:surround_{char2nr('-')} = "<% \r %>"
+  " autocmd FileType html,markdown,let b:surround_{char2nr('p')} = "{% \r %}"
+  autocmd FileType markdown let b:surround_{char2nr('i')} = "_\r_"
+  autocmd FileType markdown let b:surround_{char2nr('o')} = "**\r**"
+  autocmd FileType markdown let b:surround_{char2nr('x')} = "«\r»"
+  autocmd FileType markdown let b:surround_{char2nr('h')} = "\[\r\]\(//\)"
+  autocmd FileType markdown let b:surround_{char2nr('j')} = "!\[\r\]
+			    \\(/images/\){: .align-}"
+  autocmd FileType markdown let b:surround_{char2nr('e')} = "\[\r\]
+			    \\(\){:rel=\"noopener noreferrer\" target=\"_blank\"}"
+  autocmd FileType markdown let b:surround_{char2nr('y')} = "<a href=\"\"
+			    \ rel=\"noopener noreferrer\" target=\"_blank\">\r<\/a>"
+
+augroup END
 
 " Expand region settings
 vmap v <Plug>(expand_region_expand)
@@ -432,8 +446,8 @@ nmap <Leader>gl <Plug>(openbrowser-open)
 let g:openbrowser_browser = 'safari'
 
 " Goyo settings
-let g:goyo_width  = "80"
-let g:goyo_height = "100%"
+let g:goyo_width  = '80'
+let g:goyo_height = '100%'
 let g:goyo_linenr = 0
 
 " Vimwiki settings
@@ -458,6 +472,9 @@ let g:goyo_linenr = 0
 " --------------------------------------------------------------
 " User interface
 " --------------------------------------------------------------
+
+" Shell
+set shell=/bin/zsh
 
 " Set X lines to the cursor when moving vertically
 set scrolloff=0
@@ -493,11 +510,11 @@ set matchtime=2
 set noerrorbells
 set novisualbell
 
-if !has("nvim")
+if !has('nvim')
 	set t_vb=
 
 	" Terminal keycodes
-	if &term =~ 'screen'
+	if &term =~? 'screen'
 		set <F1>=
 		set <F2>=
 		set <F3>=
@@ -537,10 +554,15 @@ set laststatus=2
 
 " Omni completion
 if has('autocmd') && exists('+omnifunc')
-autocmd Filetype *
-	\ if &omnifunc == "" |
-	\     setlocal omnifunc=syntaxcomplete#Complete |
-	\ endif
+  augroup OmniCompletionSetup
+    autocmd!
+
+    autocmd FileType *
+      \ if &omnifunc == '' |
+      \     setlocal omnifunc=syntaxcomplete#Complete |
+      \ endif
+
+  augroup END
 endif
 
 "----------------------------------------------------------------
@@ -570,9 +592,6 @@ set nobackup
 " Prevents automatic write backup
 set nowritebackup
 
-" Use UTF-8 as default encoding
-set encoding=utf8
-
 " Use Unix as the standard file type
 set fileformats=unix,dos,mac
 
@@ -589,9 +608,13 @@ filetype indent on
 
 " Allow us to use Ctrl-s and Ctrl-q as keybinds
 " Restore default behaviour when leaving Vim.
-if !has("nvim")
-	silent !stty -ixon
-	autocmd VimLeave * silent !stty ixon
+if !has('nvim')
+  silent !stty -ixon
+
+  augroup CtrlBindings
+    autocmd!
+    autocmd VimLeave * silent !stty ixon
+  augroup END
 endif
 
 " Save the current buffer
@@ -726,7 +749,7 @@ noremap <Leader><BS> mmHmt:%s/<C-v><CR>//ge<CR>'tzt`m
 nnoremap <silent> <Leader>. :pclose<CR>
 
 " Scroll the preview window
-if !has("nvim")
+if !has('nvim')
 	set <M-d>=
 	set <M-u>=
 endif
@@ -843,10 +866,15 @@ nnoremap cv yyp
 set foldmethod=marker
 
 " Return to last edit position when opening files
-autocmd BufReadPost *
-	\ if line("'\"") > 0 && line("'\"") <= line("$") |
-	\   exe "normal! g`\"" |
-	\ endif
+augroup LastEditPosition
+  autocmd!
+
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+
+augroup END
 
 " --- Readline commands ---
 "----------------------------------------------------------------
@@ -877,9 +905,9 @@ autocmd BufReadPost *
 
 " Bracketed paste mode
 " - Source: https://ttssh2.osdn.jp/manual/en/usage/tips/vim.html
-if !has("nvim")
-	if has("patch-8.0.0238")
-		if &term =~ "screen"
+if !has('nvim')
+	if has('patch-8.0.0238')
+		if &term =~? 'screen'
 			let &t_BE = "\e[?2004h"
 			let &t_BD = "\e[?2004l"
 			exec "set t_PS=\e[200~"
@@ -950,7 +978,12 @@ nnoremap <Leader>vg :vimgrep /<C-R>//j %<CR>
 " Vimgrep the highlight in the current directory and subdirectories
 nnoremap <Leader>vf :vimgrep /<C-R>//j **/*.
 
-autocmd QuickfixCmdPre grep,grepadd,vimgrep,vimgrepadd,helpgrep copen
+augroup QuickfixSetup
+  autocmd!
+
+  autocmd QuickfixCmdPre grep,grepadd,vimgrep,vimgrepadd,helpgrep copen
+
+augroup END
 
 " Grep settings
 set grepprg=grep\ -nHi
@@ -1057,7 +1090,13 @@ inoremap ñb ()<left>
 inoremap ñB {}<left>
 inoremap ññ \
 inoremap çç {{  }}<left><left><left>
-autocmd FileType html,markdown inoremap ñp {%  %}<left><left><left>
+
+augroup InsertMappings
+  autocmd!
+
+  autocmd FileType html,markdown inoremap ñp {%  %}<left><left><left>
+
+augroup END
 
 " Enter Vim's expression register (math)
 inoremap ñc <C-r>=
@@ -1071,13 +1110,24 @@ inoremap ñc <C-r>=
 "----------------------------------------------------------------
 
 " Delete trailing white spaces
-func! s:DeleteTrailing()
-	exe 'normal mz'
-	%s/\s\+$//ge
-	exe 'normal `z'
-	echo 'Trailing white spaces have been removed.'
-	noh
-endfunc
+function! s:DeleteTrailing() abort
+    if &modifiable
+        let l:original_cursor = getpos('.')
+        let l:original_mark = getmark('z')
+
+        " Suppression des espaces de fin de ligne
+        %s/\s\+$//e
+
+        " Restauration de l'ancien marqueur et de la position du curseur
+        call setpos('.', l:original_cursor)
+        call setmark('z', l:original_mark)
+
+        echo 'Trailing white spaces have been removed.'
+        noh
+    else
+        echo 'Buffer not modifiable.'
+    endif
+endfunction
 
 " (ScriptVim)
 nnoremap <silent> <Leader>dt :call <SID>DeleteTrailing()<CR>
@@ -1208,9 +1258,15 @@ function! s:CustomCloseBuffer()
 	endif
 endfunction
 
+augroup BufferCloseSetup
+  autocmd!
+
+	autocmd BufEnter * call <SID>CloseLastBuffer()
+
+augroup END
+
 " Close the last buffer if it's the last window
 " - For 'quickfix' and 'nofile'
-autocmd BufEnter * call <SID>CloseLastBuffer()
 function! s:CloseLastBuffer()
 	if &buftype ==# 'quickfix' || &buftype ==# 'nofile'
 		if winnr('$') < 2
@@ -1252,7 +1308,14 @@ function! s:ToggleResize() abort
 		endif
 	endif
 endfunction
-autocmd VimEnter * autocmd WinEnter * let t:zoomed = 0
+
+augroup VimEnterSetup
+  autocmd!
+
+  autocmd VimEnter * autocmd WinEnter * let t:zoomed = 0
+
+augroup END
+
 
 " Search into a Visual selection
 function! s:RangeSearch(direction)
@@ -1368,12 +1431,12 @@ endfunction
 " Toggle GitGutterPreviewHunk
 function! s:ToggleGGPrev()
 	if getwinvar(winnr('#'), '&pvw') == 1
-				\ && exists('s:curr') && line(".") == s:curr
-				\ || gitgutter#hunk#in_hunk(line(".")) == 0
+				\ && exists('s:curr') && line('.') == s:curr
+				\ || gitgutter#hunk#in_hunk(line('.')) == 0
 		pclose
 	else
 		GitGutterPreviewHunk
-		let s:curr = line(".")
+		let s:curr = line('.')
 	endif
 endfunction
 
@@ -1403,8 +1466,8 @@ endfunction
 
 " Better toggle for NERDTree
 function! s:ToggleNERDTree() abort
-	if bufname('%') != ""
-		if exists("g:NERDTree") && g:NERDTree.IsOpen()
+	if bufname('%') !=? ''
+		if exists('g:NERDTree') && g:NERDTree.IsOpen()
 			if &filetype ==# 'nerdtree'
 				execute ':NERDTreeClose'
 			else
@@ -1419,6 +1482,10 @@ function! s:ToggleNERDTree() abort
 endfunction
 
 " Get Tagbar buffer name
+if !exists('s:buffer_seqno')
+	let s:buffer_seqno = 0
+endif
+
 function! s:TagbarBufName() abort
 	if !exists('t:tagbar_buf_name')
 		let s:buffer_seqno += 1
@@ -1426,6 +1493,7 @@ function! s:TagbarBufName() abort
 	endif
 	return t:tagbar_buf_name
 endfunction
+
 
 " Better toggle for Tagbar
 function! s:ToggleTagbar() abort
@@ -1450,13 +1518,13 @@ function! s:KeywordDensity() abort
 	let s:sf = " | sed '1 { /^---/ { :a N; /\\n---/! ba; d }  }'"
 	let s:sc = " | sed 's/{% comment.*endcomment %}//g'"
 	let s:sh = " | sed 's/<[^>]*.//g'"
-	let s:wc = " | wc -w"
-	let s:get_words = system("cat " . expand('%') . s:sf. s:sc . s:sh . s:wc)
+	let s:wc = ' | wc -w'
+	let s:get_words = system('cat ' . expand('%') . s:sf. s:sc . s:sh . s:wc)
 	let s:int_words = str2nr(s:get_words)
 	let s:str_words = string(s:int_words)
 
 	" Highlight count
-	let s:match_count = ""
+	let s:match_count = ''
 	redir => s:match_count
 	silent exec '%s/' . @/ . '//gne'
 	redir END
@@ -1479,7 +1547,7 @@ endfunction
 function! s:RemoveMdLink() abort
 	let [l, c] = searchpos('\v\[[^]]*]\([^)]*\)', 'ncW')
 	if l > 0 && c > 0
-		if getline(".")[col(".")-1] ==# "["
+		if getline('.')[col('.')-1] ==# '['
 			norm! xf]vf)d
 		else
 			call cursor(l, c)
@@ -1489,8 +1557,8 @@ endfunction
 
 " Custom gx to preview images in markdown
 function! s:CustomGx()
-	let l:src = expand("<cfile>")
-	execute "silent !feh " . substitute(l:src, '^/', '', 'g') . " &"
+	let l:src = expand('<cfile>')
+	execute 'silent !feh ' . substitute(l:src, '^/', '', 'g') . ' &'
 	redraw!
 endfunction
 
@@ -1517,7 +1585,7 @@ endfunction
 function! s:Scripty() abort
 	update
 	let s:runner = <SID>Runners()
-	let s:cmd = s:runner . " " . expand("%:p")
+	let s:cmd = s:runner . ' ' . expand('%:p')
 	call <SID>Commander(s:cmd)
 endfunction
 
@@ -1642,7 +1710,7 @@ function! s:SQLExec(opt) abort
 		else
 			let t:cmd = t:path . ' "' . escape(t:sql, '"') . '"'
 		endif
-		let s:cmd = "sqlite3 -list -batch " . t:cmd
+		let s:cmd = 'sqlite3 -list -batch ' . t:cmd
 		call <SID>Commander(s:cmd)
 	else
 		echo "\nThis database does not exist!"
@@ -1706,12 +1774,12 @@ command! -nargs=1 Commander call <SID>Commander(<f-args>)
 function! s:ToggleJekyll() abort
 	call system('lsof -i :4000 | grep -i listen')
 	if v:shell_error
-		silent exec "!(bundle exec jekyll serve -q -l -I &) > /dev/null"
-		call system("touch /tmp/jekyll.ps")
+		silent exec '!(bundle exec jekyll serve -q -l -I &) > /dev/null'
+		call system('touch /tmp/jekyll.ps')
 		call system("notify-send -t 2 'Executing Jekyll server...'")
 	else
-		silent exec "!(pkill -f jekyll &) > /dev/null"
-		call system("rm -f /tmp/jekyll.ps")
+		silent exec '!(pkill -f jekyll &) > /dev/null'
+		call system('rm -f /tmp/jekyll.ps')
 		call system("notify-send -t 2 'Jekyll server was stoped!'")
 	endif
 	redraw!
@@ -1724,7 +1792,7 @@ function! s:ViewJekyllPost() abort
 	let s:file = expand('%')
 	let s:sed = expand(" | sed 's/permalink: //g'")
 	let s:permalink = system(s:grep . s:file . s:sed)
-	call system("google-chrome http://localhost:4000" . s:permalink)
+	call system('google-chrome http://localhost:4000' . s:permalink)
 endfunction
 
 " Shell output to the buffer
@@ -1732,3 +1800,5 @@ command! -nargs=1 SH :r !<args>
 
 " Use Terminal GPT
 "nnoremap <Leader>T :SH tgpt -q "-
+
+
