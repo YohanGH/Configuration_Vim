@@ -18,6 +18,8 @@
 ---
 ## 1.1.01
 
+- { ' commit ; '3c38221' }
+
 - Encoding ;
     - L588 Befor L45 -> Move
     - L48 UTF-8 -> Add
@@ -42,7 +44,8 @@
     - L1301 Integration of augroup in the vimplug configuration -> Add
 
     - L1479 Define the variable seqno -> Add
-    - L1113 Securing the order -> Add 
+    - L1113 Securing the order -> Add
+
 ## 1.0.0
 
 - Initial commit, first version. { 'commit' : 'f672f88' }
