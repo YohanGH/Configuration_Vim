@@ -16,9 +16,14 @@
 # Changelog
 
 ---
-## 1.1.01
 
-- { ' commit ; '3c38221' }
+## 1.2.0 { 'commit' ; '1ca3fb6' }
+
+- Replace vimrc with .vimrc and update on added functionality
+    - Deactivates the arrow keys
+    - double ;; replaces esc 
+
+## 1.1.01 { 'commit' ; '3c38221' }
 
 - Encoding ;
     - L588 Befor L45 -> Move
@@ -46,6 +51,6 @@
     - L1479 Define the variable seqno -> Add
     - L1113 Securing the order -> Add
 
-## 1.0.0
+## 1.0.0 { 'commit' : 'f672f88' }
 
-- Initial commit, first version. { 'commit' : 'f672f88' }
+- Initial commit, first version. 
