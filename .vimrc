@@ -6,7 +6,7 @@
 "    By: YohanGH <YohanGH@proton.me>                    //    ''     Code      "
 "                                                      (|     | )              "
 "    Created: 2023/12/03 14:11:26 by YohanGH           '__   _/_               "
-"    Updated: 2023/12/03 16:49:54 by YohanGH          (___)=(___)              "
+"    Updated: 2023/12/27 21:43:25 by YohanGH          (___)=(___)              "
 "                                                                              "
 " **************************************************************************** "
 " --------------------------------------------------------------
@@ -37,6 +37,23 @@
 "	- Filetype settings
 "	- Helper functions
 "	- External tools integration
+
+" --- Hard Mode
+" --------------------------------------------------------------
+
+" Desactiver les touches directionnelles
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
+
+" Le double point virgule remplace Esc
+:imap ;; <Esc>
+:map ;; <Esc>
 
 " --------------------------------------------------------------
 " General settings
