@@ -6,7 +6,7 @@
 "    By: YohanGH <YohanGH@proton.me>                    //    ''     Code      "
 "                                                      (|     | )              "
 "    Created: 2023/12/03 14:11:26 by YohanGH           '__   _/_               "
-"    Updated: 2023/12/27 21:43:25 by YohanGH          (___)=(___)              "
+"    Updated: 2024/02/07 17:26:16 by YohanGH          (___)=(___)              "
 "                                                                              "
 " **************************************************************************** "
 " --------------------------------------------------------------
@@ -119,6 +119,9 @@ endif
 
 " --- Plugins ---
 " --------------------------------------------------------------
+" -- Prettier
+" packloadall
+" --
 
 call plug#begin('~/.vim/plugged')
 
@@ -187,7 +190,12 @@ call plug#begin('~/.vim/plugged')
 	Plug 'mattn/emmet-vim'
 	"Plug 'vimwiki/vimwiki', { 'branch': 'master' }
 
-call plug#end()
+	" Prettier
+	Plug 'prettier/vim-prettier', {
+	  \ 'do': 'yarn install --frozen-lockfile --production',
+	  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+
+	call plug#end()
 
 "----------------------------------------------------------------
 " Plugins settings
@@ -655,6 +663,9 @@ nnoremap vab ggVG
 "----------------------------------------------------------------
 " Buffers management
 "----------------------------------------------------------------
+" Yank Buffer *
+set clipboard=unnamed
+
 " Buffer hidden when it is abandoned
 set hidden
 
