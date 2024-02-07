@@ -17,11 +17,15 @@
 
 ---
 
+## 1.2.1 { 'commit' ; '6c4a70e' }
+
+- Modification Buffer Yank in *
+
 ## 1.2.0 { 'commit' ; '1ca3fb6' }
 
 - Replace vimrc with .vimrc and update on added functionality
     - Deactivates the arrow keys
-    - double ;; replaces esc 
+    - double ;; replaces esc
 
 ## 1.1.01 { 'commit' ; '3c38221' }
 
